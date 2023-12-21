@@ -1,0 +1,11 @@
+
+
+        .first_Parent{
+            display: flex;
+            flex-direction: column;
+            border: 5px solid red;
+        }
+
+        .first_child{
+            border: 2px solid black;
+        }
