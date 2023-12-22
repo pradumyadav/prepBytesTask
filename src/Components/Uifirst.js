@@ -1,14 +1,13 @@
-// Uifirst.js
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Style.css";
-import Uisecond from "./Uisecond";
+import { LiaEditSolid } from "react-icons/lia";
+import { MdDelete } from "react-icons/md";
 
-export default function Uifirst() {
+export default function Uifirst({ onCompletedTask }) {
   const [input, setInput] = useState("");
   const [data, setData] = useState([]);
   const [editableTaskId, setEditableTaskId] = useState(null);
-  const [completedTasks, setCompletedTasks] = useState([]);
 
   useEffect(() => {
     axios
@@ -66,25 +65,38 @@ export default function Uifirst() {
   const handleComplete = (taskId) => {
     const taskToComplete = data.find((item) => item.id === taskId);
     const updatedData = data.map((item) =>
-      item.id === taskId ? { ...item, completed: true } : item
+      item.id === taskId ? { ...item, completed: !item.completed } : item
     );
 
     setData(updatedData);
-    setCompletedTasks((prevCompletedTasks) => [
-      ...prevCompletedTasks,
-      taskToComplete,
-    ]);
+    onCompletedTask(taskToComplete);
   };
 
   return (
     <>
-      <div>
-        <input type="text" value={input} onChange={handleChange} required />
-        <button onClick={editableTaskId ? handleSaveEdit : handleClick}>
+      <div className="input_Parent">
+        <input
+          className="Add_Task_Input"
+          type="text"
+          value={input}
+          placeholder="Add Task"
+          onChange={handleChange}
+          required
+        />
+        <button
+          className="Add_Task_Button"
+          onClick={editableTaskId ? handleSaveEdit : handleClick}
+        >
           {editableTaskId ? "Save Edit" : "Add Task"}
         </button>
+
         {editableTaskId && (
-          <button onClick={handleCancelEdit}>Cancel Edit</button>
+          <button
+            className="Add_Task_Button"
+            onClick={handleCancelEdit}
+          >
+            Cancel Edit
+          </button>
         )}
       </div>
       <div className="first_Parent">
@@ -100,23 +112,29 @@ export default function Uifirst() {
                 />
               ) : (
                 <div
-                  style={{
-                    color: item.completed ? "green" : "red",
-                    cursor: "pointer",
-                  }}
+                  className={`main_Title ${item.completed ? "completed" : ""}`}
                   onClick={() => handleComplete(item.id)}
                 >
                   {item.title}
                 </div>
               )}
-              <div>
-                <button onClick={() => handleEdit(item.id)}>Edit</button>
-                <button onClick={() => handleDelete(item.id)}>Delete</button>
+              <div className="edit_Delete_Button">
+                <button
+                  className="button"
+                  onClick={() => handleEdit(item.id)}
+                >
+                  <LiaEditSolid className="edit_Button" />
+                </button>
+                <button
+                  className="button"
+                  onClick={() => handleDelete(item.id)}
+                >
+                  <MdDelete className="delete_Button" />
+                </button>
               </div>
             </div>
           ))}
       </div>
-      <Uisecond completedTasks={completedTasks} />
     </>
   );
 }

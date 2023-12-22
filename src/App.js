@@ -1,13 +1,18 @@
-
-import './App.css';
-import Uisecond from './Components/Uisecond.js';
-import Uifirst from './Components/Uifirst.js';
+import React from "react";
+import Toggel from "./Components/Toggel.js";
+import "./App.css"
 
 function App() {
   return (
     <div>
-      <Uifirst/>
-      <Uisecond/>
+      <div className="app_Parent">
+        
+        <h1>To Do What You Want</h1>
+       
+        </div>
+        
+      <Toggel/>
+     
     </div>
   );
 }
