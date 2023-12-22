@@ -22,7 +22,7 @@ export default function Toggel() {
      
         
       </div>
-      {showUifirst ? <Uifirst onCompletedTask={handleCompletedTask} /> : <Uisecond completedTasks={completedTasks} />}
+      {showUifirst ? <Uifirst onCompletedTask={handleCompletedTask} /> : <Uisecond completedTasks={completedTasks}/>}
     </div>
   );
 }
