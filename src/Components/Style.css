@@ -141,6 +141,7 @@ body {
     font-size: 25px;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 800;
+    width: 50%;
 }
 
 
@@ -284,6 +285,7 @@ margin-bottom: 2%;
 font-size: 23px;
 font-family: 'Courier New', Courier, monospace;
 font-weight: 800;
+width:90%;
 }
 
 }
