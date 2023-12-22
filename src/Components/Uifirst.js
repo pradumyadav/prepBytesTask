@@ -1,11 +1,14 @@
+// Uifirst.js
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./Style.css";
+import Uisecond from "./Uisecond";
 
 export default function Uifirst() {
   const [input, setInput] = useState("");
   const [data, setData] = useState([]);
   const [editableTaskId, setEditableTaskId] = useState(null);
+  const [completedTasks, setCompletedTasks] = useState([]);
 
   useEffect(() => {
     axios
@@ -33,16 +36,12 @@ export default function Uifirst() {
   };
 
   const handleEdit = (taskId) => {
-    // Set the taskId to make it editable
     setEditableTaskId(taskId);
-
-    // Find the task with the specified ID and set its title as the current input
     const taskToEdit = data.find((item) => item.id === taskId);
     setInput(taskToEdit.title);
   };
 
   const handleSaveEdit = () => {
-    // Find the task with the editableTaskId and update its title
     const updatedData = data.map((item) =>
       item.id === editableTaskId ? { ...item, title: input } : item
     );
@@ -53,17 +52,28 @@ export default function Uifirst() {
   };
 
   const handleCancelEdit = () => {
-    // Cancel the edit mode
     setEditableTaskId(null);
     setInput("");
   };
 
   const handleDelete = (taskId) => {
-    // Filter out the task with the specified ID
     const updatedData = data.filter((item) => item.id !== taskId);
     setData(updatedData);
     setEditableTaskId(null);
     setInput("");
+  };
+
+  const handleComplete = (taskId) => {
+    const taskToComplete = data.find((item) => item.id === taskId);
+    const updatedData = data.map((item) =>
+      item.id === taskId ? { ...item, completed: true } : item
+    );
+
+    setData(updatedData);
+    setCompletedTasks((prevCompletedTasks) => [
+      ...prevCompletedTasks,
+      taskToComplete,
+    ]);
   };
 
   return (
@@ -89,7 +99,15 @@ export default function Uifirst() {
                   required
                 />
               ) : (
-                <div>{item.title}</div>
+                <div
+                  style={{
+                    color: item.completed ? "green" : "red",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => handleComplete(item.id)}
+                >
+                  {item.title}
+                </div>
               )}
               <div>
                 <button onClick={() => handleEdit(item.id)}>Edit</button>
@@ -98,6 +116,7 @@ export default function Uifirst() {
             </div>
           ))}
       </div>
+      <Uisecond completedTasks={completedTasks} />
     </>
   );
 }
