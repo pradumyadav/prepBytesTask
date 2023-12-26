@@ -1,9 +1,9 @@
 import React from "react";
-import { FaSearch, FaFire } from "react-icons/fa";
+import { FaSearch} from "react-icons/fa";
 
 const Uisecond = ({ completedTasks }) => {
   return (
-    <div>
+    <div className="second_Parent">
       {completedTasks && completedTasks.length === 0 ? (
         <div className="empty-state">
           <div>
@@ -14,10 +14,10 @@ const Uisecond = ({ completedTasks }) => {
           </div>
         </div>
       ) : (
-        <ul className="ul">
+        <ul  type="none" className="ul">
           {completedTasks.map((task) => (
             <li key={task.id}>
-              <FaFire /> {task.title} <FaFire />
+               {task.title}
             </li>
           ))}
         </ul>

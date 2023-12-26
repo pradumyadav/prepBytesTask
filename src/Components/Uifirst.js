@@ -74,12 +74,13 @@ export default function Uifirst({ onCompletedTask }) {
 
   return (
     <>
+    <div className="parent">
       <div className="input_Parent">
         <input
           className="Add_Task_Input"
           type="text"
           value={input}
-          placeholder="Add Task"
+          placeholder="Add   Task"
           onChange={handleChange}
           required
         />
@@ -116,7 +117,9 @@ export default function Uifirst({ onCompletedTask }) {
                   onClick={() => handleComplete(item.id)}
                 >
                   {item.title}
+                
                 </div>
+                
               )}
               <div className="edit_Delete_Button">
                 <button
@@ -131,9 +134,13 @@ export default function Uifirst({ onCompletedTask }) {
                 >
                   <MdDelete className="delete_Button" />
                 </button>
+               
               </div>
+               <hr/>
             </div>
+            
           ))}
+      </div>
       </div>
     </>
   );

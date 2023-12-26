@@ -7,7 +7,7 @@ function App() {
     <div>
       <div className="app_Parent">
         
-        <h1>To Do What You Want</h1>
+        <h1>To Do List</h1>
        
         </div>
         

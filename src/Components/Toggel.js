@@ -17,7 +17,7 @@ export default function Toggel() {
     <div>
       <div className="toggel_Button">
        
-        <button className="task_Button" onClick={() => setShowUifirst(true)}>Task</button>
+        <button className="task_Button" onClick={() => setShowUifirst(true)}> All Task</button>
         <button className="Completed_Task" onClick={() => setShowUifirst(false)}>Completed Task</button>
      
         
